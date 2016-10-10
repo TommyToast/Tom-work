@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pressbookTool for Toast</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="dropzone-master/dist/dropzone.js"></script>
+           <style>
+               body{text-align: center;margin: 0px;padding; 0px;}
+               ul{list-style: none;}
+               .pressbookName{position: absolute;height: 100%;width: 100%;background-color: white;color: white;z-index: 99999;text-align: center;}
+               .pressbookName input:nth-child(1){margin-top: 500px;}
+               #pbkID{height:50px;font-size:32px;}
+               #pressbookID{height: 100px;font-size: 20px;width: 100px;display: inline-block;border-radius: 20px;background-color: #337ab7;border: 1px solid #2e6da4;color: white;}
+               #pressbookID:hover{background-color: #2e6da4;box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+               #pbkprod{text-transform:uppercase}
+               #currentPbImg img{height: 500px;}
+               #imgnameadd{display: none;}
+               .btnz{display: none;}
+               .holder{z-index: 50;width: 100%;position: relative;min-height: 200px;text-align: center;display: none ;}
+               .code{width:100%;position: relative;background-color: #4099ff;padding: 10px 0px 10px 0px;text-align: center;font-size: 18px;color: white;letter-spacing: 1px;}
+               form{margin:0px;width: 100%;display:none;}
+               #my-awesome-dropzone{border: 3px dashed grey;background-color: lightgrey;border-radius: 20px;min-height:200px;width: 100%;margin: 0px; }
+               .productData{display: none;}
+               .dz-preview.dz-processing.dz-error.dz-complete.dz-image-preview{display: inline-block;margin: 10px;}
+               .dz-error-message{display: none;}
+               .dz-error-mark{display: none;}
+               .dz-success-mark{display: none;}
+               .pressbookImageId{color: red;}
+               #num{color: red;}
+               #go{background-color: #337ab7;border: 1px solid #2e6da4;border-radius: 8px;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: inline-block;font-size: 16px;margin: 50px;}
+               #go:hover {box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+               #addProd{background-color: #4CAF50;border: 1px solid #31a350;border-radius: 8px;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: none;font-size: 16px;margin: 50px;}
+               #addProd:hover {background-color: #31a350;box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+               #imageOnly{background-color: #337ab7;border: 1px solid #2e6da4;border-radius: 8px;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: none;font-size: 16px;margin: 50px;}
+               #imageOnly:hover {background-color: #2e6da4;box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+               #next{background-color: #d9534f;border: 1px solid #c9302c;border-radius: 8px;color: white;padding: 15px 32px;text-align: center;text-decoration: none;display: none;font-size: 16px;margin: 50px;}
+               #next:hover {background-color: #c9302c;box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);}
+               input[type=text]{border: 2px solid lightgrey;border-radius: 4px;height: 40px;margin-top: 20px;font-size: 26px;}
+               input[type="text"]{font-size:12px;}
+               .outputArea{height: 200px;background-color: lightgreen}
+
+    </style>
+</head>
+<body>
+    <div class="topContainer">
+        <input type="text" wrap="hard" style="height: 500px;width: 800px;" class="textBox"/>
+        <button type="submit" class="kybosh">BOSCH!</button>
+        <div class="holder">
+            <form id="my-awesome-dropzone" action="/target" class="dropzone"></form>
+            <button type="submit" id="go">GO</button>
+            <button type="submit" id="addProd" class="btnz">Add new product</button>
+            <button type="submit" id="imageOnly" class="btnz">Image only</button>
+            <button type="submit" id="next" class="btnz">Next Pressbook Item</button>
+        </div>
+        <div class="outputArea"></div>
+        
+        
+        <br />
+        <div id="currentPbImg"><img src=""></div>
+        <h2>Pressbook Item: </h2>
+        <h1 id="num"></h1>
+        <div class="productData">
+           Title:
+           <input type="text" id="pbktitle" />
+           <br />
+            Price: 
+            <input type="text" value="" id="pbkprice" />
+            <br />
+            Product ID:
+            <input type="text" id="pbkprod" />
+            <br /> Colourway:
+            <input type="text" value="" id="pbkcol" />
+            <ul></ul>
+        </div>
+        <br />
+        <br />
+        <h2>JSON Code: </h2>
+    </div>
+    <div class="code">
+    </div>
+<script>
+    
+        $(document).ready(function () {
+
+            $('.kybosh').click(function(){
+            $('.outputArea').html($('.textBox').val())
+$('.outputArea').append('<br />' + JSON.parse($('.textBox').val()))
+            
+            })
+        })
+    </script>
+    </body>
+</html>
+           /* 
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+     var first = 0;
+     var counter = 1;
+     imageArray = [];
+     imageFromArr = imageArray[counter];
+     $('#num').text(counter);
+     $('#pressbookID').click(function () {
+         $('.code').append($('#pbkID').val() + ' = [{ <br />');
+         $('.productData, .holder, form').css('display', 'block');
+         $('.pressbookName').css('display', 'none');
+     });
+
+     $('#addProd').click(function () {
+         $('#imageOnly').hide();
+         first++;
+         if (first <= 1) {
+             if ($('#pbkprod').val() == "" || $('#pbkcol').val() == "") {
+                 alert('negatory');
+             } else {
+                 $('.code').append('"Looks":[{<br />"_id": "' + counter + ',<br />');
+                $('.code').append('"title": "' + $('pbktitle').val() + '",<br />');
+                 $('.code').append('"img": "' + image)
+                 $('.code').append('"price": "' + $('pbkprice').val() + '",<br />');
+                 $('.code').append('"pnum": "' + $('pbkprod').val() + '",<br />');
+                 $('.code').append('"colourway": "' + $('pbkcol').val() + '",<br />');
+                 
+             }
+         } else {
+             if ($('#pbktitle').val() == "" || $('#pbkprice').val() == "" || $('#pbkprod').val() == "" || $('#pbkcol').val() == "") {
+                 alert('negatory');
+             } else {
+                 $('.code').append('<br/>');
+                 $('.code').append('},{<br />prodTitle: '+ '"' + $('#pbktitle').val() + '",<br />prodPrice: '+ '"' + $('#pbkprice').val() + ',<br />prodId: ' + '"' + $('#pbkprod').val().toUpperCase() + '",<br />');
+                 $('.code').append('skuColor: ' + '"' + $('#pbkcol').val().toLowerCase() + '"');
+                 $('#pbkprod').val("");
+                 $('#pbkcol').val("");
+
+             }
+         }
+     });
+
+     $('#go').click(function () {
+
+         $('.btnz').show();
+         count = 0;
+         $('.code').append('products: [{');
+         $(this).css('display', 'none');
+         $('.dz-image img').each(function (index) {
+             imageArray.push($(this).attr('alt'));
+             console.log(imageArray);
+         })
+         for (var i = 0; i <= $('.dz-image img').length + 1; i++) {
+             count++;
+             $('form .dz-preview:nth-child(' + i + ')').prepend('<h1 class="pressbookImageId">' + (count - 2) + '</h1>');
+         }
+         $('#currentPbImg img').attr('src','//d117fiyhpld8f9.cloudfront.net/content-images/pressbook/950/' + imageArray[0]);
+         theArrayofImages = JSON.stringify(imageArray);
+         localStorage.setItem("imageArr", theArrayofImages);
+     })
+
+     $('#imageOnly').click(function () {
+         $('#addProd, #imageOnly').hide();
+         $('.code').append('<br/>prodId: "",' + '<br/>skuColor: ""');
+     });
+
+     $('#next').click(function () {
+         $('#currentPbImg img').attr('src','//d117fiyhpld8f9.cloudfront.net/content-images/pressbook/950/' + imageArray[counter]);
+         $('#imageOnly').show();
+         $('#addProd').show();
+         first = 0;
+
+         if (counter < imageArray.length) {
+             $('.code').append('<br />}],<br />imgThumbSrc: "//d117fiyhpld8f9.cloudfront.net/content-images/pressbook/950/' + imageArray[counter - 1] + '",' + '<br/>' + 'imgSrc: "//d117fiyhpld8f9.cloudfront.net/content-images/pressbook/700/' + imageArray[counter - 1] + '",' + '<br/>orientation: "portrait", <br/>percentWidth: "50", <br/>pressbookID: ' + counter + ',<br/>float: "left" <br/>},{<br />products: [{');;
+         } else {
+             $('.code').append('<br />}],<br />imgThumbSrc: "//d117fiyhpld8f9.cloudfront.net/content-images/pressbook/950/' + imageArray[counter - 1] + '",' + '<br/>' + 'imgSrc: "//d117fiyhpld8f9.cloudfront.net/content-images/pressbook/700/' + imageArray[counter - 1] + '",' + '<br/>orientation: "portrait", <br/>percentWidth: "50", <br/>pressbookID: ' + counter + ',<br/>float: "left" <br/>}];');
+             alert('done');
+             $('.topContainer').hide();
+             $('.code').css('background-color', '#232323');
+         }
+
+         counter++;
+
+         $('#num').text(counter);
+     });
+   
+
+      
+ });
+
+</script>
+    </body>
+</html>
